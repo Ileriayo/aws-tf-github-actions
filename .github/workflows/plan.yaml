@@ -1,16 +1,9 @@
 name: Create terraform plan
 
 on: 
-  workflow_dispatch:
-    inputs:
-      bucket:
-        description: 'Name of the S3 Bucket'
-        required: true
-        type: string
-      ecr:
-        description: 'Name of the ECR Repository'
-        required: true
-        type: string
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -33,5 +26,5 @@ jobs:
         with:
           path: ./
           variables: |
-            bucket_name = "${{ inputs.bucket }}"
-            repository_name = "${{ inputs.ecr }}"
+            bucket_name = "ghactions-test-${{ github.sha }}"
+            repository_name = "ghactions-test-${{ github.sha }}"
