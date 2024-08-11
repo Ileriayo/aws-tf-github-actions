@@ -1,0 +1,38 @@
+name: Plan and Apply Terraform
+
+on: 
+  workflow_dispatch:
+    inputs:
+      bucket:
+        description: 'Name of the S3 Bucket'
+        required: true
+        type: string
+      ecr:
+        description: 'Name of the ECR Repository'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    name: Create a plan for the terraform configuration
+    env:
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: terraform plan
+        uses: dflook/terraform-plan@v1
+        with:
+          path: ./
+          auto_approve: true
+          variables: |
+            bucket_name = "${{ inputs.bucket }}"
+            repository_name = "${{ inputs.ecr }}"
