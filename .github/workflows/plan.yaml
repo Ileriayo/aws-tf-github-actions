@@ -1,4 +1,4 @@
-name: Create terraform plan
+name: Terraform Plan
 
 on: 
   pull_request:
@@ -12,7 +12,7 @@ permissions:
 jobs:
   plan:
     runs-on: ubuntu-latest
-    name: Create a plan for the terraform configuration
+    name: Terraform Plan
     env:
       GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
