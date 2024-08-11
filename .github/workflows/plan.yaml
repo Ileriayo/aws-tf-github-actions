@@ -2,6 +2,15 @@ name: Create terraform plan
 
 on: 
   workflow_dispatch:
+    inputs:
+      bucket:
+        description: 'Name of the S3 Bucket'
+        required: true
+        type: string
+      ecr:
+        description: 'Name of the ECR Repository'
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -21,3 +30,6 @@ jobs:
         uses: dflook/terraform-plan@v1
         with:
           path: ./
+          variables: |
+            bucket_name = "${{ inputs.bucket }}"
+            repository_name = "${{ inputs.ecr }}"
