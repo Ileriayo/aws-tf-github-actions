@@ -10,5 +10,4 @@ terraform {
 provider "aws" {
   # Configuration options
   region = "eu-central-1"
-  profile = "nahmii-ancillary"
 }
