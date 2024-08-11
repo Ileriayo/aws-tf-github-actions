@@ -1,9 +1,16 @@
-name: Create terraform plan
+name: Plan and Apply Terraform
 
 on: 
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      bucket:
+        description: 'Name of the S3 Bucket'
+        required: true
+        type: string
+      ecr:
+        description: 'Name of the ECR Repository'
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -25,6 +32,7 @@ jobs:
         uses: dflook/terraform-plan@v1
         with:
           path: ./
+          auto_approve: true
           variables: |
-            bucket_name = "ghactions-test-${{ github.sha }}"
-            repository_name = "ghactions-test-${{ github.sha }}"
+            bucket_name = "${{ inputs.bucket }}"
+            repository_name = "${{ inputs.ecr }}"
