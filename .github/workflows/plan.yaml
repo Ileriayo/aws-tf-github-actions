@@ -24,7 +24,7 @@ jobs:
       - name: terraform plan
         uses: dflook/terraform-plan@v1
         with:
-          path: ./
+          path: ./roots/**
           backend_config_file: backend.tfvars.ghactions
           variables: |
             bucket_name = "ghactions-test-${{ github.sha }}"
