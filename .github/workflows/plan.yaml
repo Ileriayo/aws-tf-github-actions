@@ -25,6 +25,7 @@ jobs:
         uses: dflook/terraform-plan@v1
         with:
           path: ./roots/bucket
+          backend_type: s3
           backend_config: |
             bucket=ileri-tf-state
             key=tfstate
@@ -36,6 +37,7 @@ jobs:
         uses: dflook/terraform-plan@v1
         with:
           path: ./roots/ecr
+          backend_type: s3
           backend_config: |
             bucket=ileri-tf-state
             key=tfstate
