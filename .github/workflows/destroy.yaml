@@ -22,4 +22,7 @@ jobs:
       - name: terraform destroy
         uses: dflook/terraform-destroy@v1
         with:
-          backend_config_file: backend.tfvars.ghactions
+          backend_config: |
+            bucket=ileri-tf-state
+            key=tfstate
+            region=eu-central-1
