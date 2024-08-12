@@ -24,11 +24,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: terraform plan
+      - name: terraform plan and apply
         uses: dflook/terraform-apply@v1
         with:
           path: ./roots/bucket
-          backend_config_file: backend.tfvars.ghactions
+          backend_config: |
+            bucket=ileri-tf-state
+            key=tfstate
+            region=eu-central-1
           auto_approve: true
           variables: |
             bucket_name = "${{ inputs.bucket }}"
