@@ -1,14 +1,10 @@
-name: Terraform Apply
+name: Create AWS S3 Bucket
 
 on: 
   workflow_dispatch:
     inputs:
       bucket:
         description: 'Name of the S3 Bucket'
-        required: true
-        type: string
-      ecr:
-        description: 'Name of the ECR Repository'
         required: true
         type: string
 
@@ -31,8 +27,9 @@ jobs:
       - name: terraform plan
         uses: dflook/terraform-apply@v1
         with:
-          path: ./
+          path: ./bucket.tf
+          backend_config_file: backend.tfvars.ghactions
           auto_approve: true
           variables: |
             bucket_name = "${{ inputs.bucket }}"
-            repository_name = "${{ inputs.ecr }}"
+            

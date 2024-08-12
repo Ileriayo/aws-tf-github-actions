@@ -1,0 +1,3 @@
+bucket="ileri-tf-state"
+key="tfstate"
+region="eu-central-1"
