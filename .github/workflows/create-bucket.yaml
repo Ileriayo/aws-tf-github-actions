@@ -27,7 +27,7 @@ jobs:
       - name: terraform plan
         uses: dflook/terraform-apply@v1
         with:
-          path: ./bucket.tf
+          path: ./roots/bucket
           backend_config_file: backend.tfvars.ghactions
           auto_approve: true
           variables: |

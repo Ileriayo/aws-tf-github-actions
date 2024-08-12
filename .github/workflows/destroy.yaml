@@ -1,4 +1,4 @@
-name: Create AWS S3 Bucket
+name: Terraform Destroy
 
 on: 
   workflow_dispatch:
