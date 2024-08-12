@@ -21,11 +21,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: terraform plan
+      - name: terraform plan - S3 Bucket
         uses: dflook/terraform-plan@v1
         with:
-          path: ./
-          backend_config_file: backend.tfvars.ghactions
+          path: ./roots/bucket
+          backend_config: |
+            bucket=ileri-tf-state
+            key=tfstate
+            region=eu-central-1
           variables: |
             bucket_name = "ghactions-test-${{ github.sha }}"
+
+      - name: terraform plan - ECR Repo
+        uses: dflook/terraform-plan@v1
+        with:
+          path: ./roots/ecr
+          backend_config: |
+            bucket=ileri-tf-state
+            key=tfstate
+            region=eu-central-1
+          variables: |
             repository_name = "ghactions-test-${{ github.sha }}"
